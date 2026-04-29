@@ -1,0 +1,66 @@
+.dropdown {
+  position: relative;
+  cursor: pointer;
+}
+
+/* header du menu */
+.dropdown-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* titre */
+.dropdown-title {
+  font-size: 14px;
+  color: white;
+  letter-spacing: 1px;
+}
+
+/* flèche */
+.dropdown-arrow {
+  color: white; // 👈 essentiel
+  transition: transform 0.3s ease;
+}
+
+.dropdown-arrow.rotated {
+  transform: rotate(180deg);
+}
+
+/* menu caché */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 35px;
+  right: 0;
+  background: #111;
+  padding: 10px 15px;
+  min-width: 180px;
+}
+
+/* menu visible */
+.dropdown-content.show {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* liens */
+.dropdown-content a {
+  color: white;
+  font-size: 13px;
+}
+
+.dropdown-content a:hover {
+  opacity: 0.7;
+}
+
+.dropdown-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  color: white;
+}
+
