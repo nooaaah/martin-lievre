@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router"
 import { useState, useEffect } from "react";
 import DropDown from "./DropDown";
 import "../styles/header.scss";
@@ -8,38 +8,19 @@ export default function Header() {
   const [arrCategories, setArrCategories] = useState([]);
 
   useEffect(() => {
-    const cached = sessionStorage.getItem("menuData");
-
-    if (cached) {
-      const data = JSON.parse(cached);
-      setCompCategories(data.comp || []);
-      setArrCategories(data.arr || []);
-    } else {
-      Promise.all([
-        fetch("https://martinlievre.ch/wp-json/wp/v2/categorie_compositions").then(r => r.json()),
-        fetch("https://martinlievre.ch/wp-json/wp/v2/categorie_arrangements").then(r => r.json())
-      ]).then(([comp, arr]) => {
-        
-        // sécurité anti crash
-        const compFiltered = Array.isArray(comp)
-          ? comp.filter(c => c.count > 0)
-          : [];
-
-        const arrFiltered = Array.isArray(arr)
-          ? arr.filter(c => c.count > 0)
-          : [];
-
-        setCompCategories(compFiltered);
-        setArrCategories(arrFiltered);
-
-        sessionStorage.setItem(
-          "menuData",
-          JSON.stringify({ comp: compFiltered, arr: arrFiltered })
-        );
-      });
+  async function fetchCategories() {
+    try {
+      const response = await fetch("http://localhost:5000/categories")
+      const data = await response.json()
+      setCompCategories(data.compositions.map(cat => ({ slug: cat, name: cat })))
+      setArrCategories(data.arrangements.map(cat => ({ slug: cat, name: cat })))
+    } catch (error) {
+      console.log(error)
     }
-  }, []);
-  console.log("compCategories:", compCategories);
+  }
+  fetchCategories()
+}, [])
+  
 
   return (
     <header className="header">
@@ -54,7 +35,7 @@ export default function Header() {
         {/* COMPOSITIONS */}
         <DropDown titre="Compositions">
           {compCategories.map(cat => (
-            <Link key={cat.id} to={`/compositions/${cat.slug}`}>
+            <Link key={cat.slug} to={`/compositions/${cat.slug}`}>
               {cat.name}
             </Link>
           ))}
@@ -63,7 +44,7 @@ export default function Header() {
         {/* ARRANGEMENTS */}
         <DropDown titre="Arrangements">
           {arrCategories.map(cat => (
-            <Link key={cat.id} to={`/arrangements/${cat.slug}`}>
+            <Link key={cat.slug} to={`/arrangements/${cat.slug}`}>
               {cat.name}
             </Link>
           ))}

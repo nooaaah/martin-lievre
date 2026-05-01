@@ -1,5 +1,6 @@
 require("dotenv").config()
 const Composition = require("./models/Composition")
+const Message = require("./models/Message")
 const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors")
@@ -26,6 +27,25 @@ app.get("/compositions", async(req,res)=>{
   }
 })
 
+app.get("/compositions/:categorie", async (req, res) => {
+  try {
+    const compositions = await Composition.find({ categorie: req.params.categorie })
+    res.json(compositions)
+  } catch (error) {
+    res.json({ message: "erreur" })
+  }
+})
+
+app.get("/categories", async (req, res) => {
+  try {
+    const compositions = await Composition.distinct("categorie")
+    const arrangements = await Composition.distinct("categorie", { type: "arrangement" })
+    res.json({ compositions, arrangements })
+  } catch (error) {
+    res.json({ message: "erreur" })
+  }
+})
+
 
 app.post("/compositions", async(req,res)=>{
   try{
@@ -34,6 +54,16 @@ app.post("/compositions", async(req,res)=>{
     res.json({message: "composition sauvegardé"})
   } catch(error){
     res.json({message: "erreur"})
+  }
+})
+
+app.post("/contact", async (req, res) => {
+  try {
+    const message = new Message(req.body)
+    await message.save()
+    res.json({ message: "message envoyé" })
+  } catch (error) {
+    res.json({ message: "erreur" })
   }
 })
 
