@@ -1,32 +1,33 @@
-import "../styles/footer.scss";
+import { Link } from "react-router"
 
 export default function Footer() {
   return (
-    <footer className="footer">
+    <footer className="flex justify-between items-center px-16 py-8 border-t border-gray-800">
       
-      {/* LEFT (non cliquable) */}
-      <div className="footer__left">
-        <span>ML</span>
+      <div>
+        <span className="text-white text-sm tracking-widest">ML</span>
       </div>
 
-      {/* CENTER (cliquable Instagram) */}
-      <div className="footer__center">
+      <div>
         <a
           href="https://instagram.com"
           target="_blank"
           rel="noreferrer"
-          className="footer__icon"
+          className="text-white hover:text-gray-300 transition-colors"
         >
-          <i className="fa-brands fa-instagram"></i>
+          <i className="fa-brands fa-instagram text-xl"></i>
         </a>
       </div>
 
-      {/* RIGHT (liens cliquables) */}
-      <div className="footer__right">
-        <a href="/mentions-legales">Mentions légales</a>
-        <a href="/confidentialite">Termes & Confidentialité</a>
+      <div className="flex gap-6">
+        <Link to="/mentions-legales" className="text-gray-400 text-sm hover:text-white transition-colors">
+          Mentions légales
+        </Link>
+        <Link to="/confidentialite" className="text-gray-400 text-sm hover:text-white transition-colors">
+          Termes & Confidentialité
+        </Link>
       </div>
 
     </footer>
-  );
+  )
 }

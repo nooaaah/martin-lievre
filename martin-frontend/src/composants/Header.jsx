@@ -1,7 +1,7 @@
 import { Link } from "react-router"
 import { useState, useEffect } from "react";
 import DropDown from "./DropDown";
-import "../styles/header.scss";
+
 
 export default function Header() {
   const [compCategories, setCompCategories] = useState([]);
@@ -23,37 +23,34 @@ export default function Header() {
   
 
   return (
-    <header className="header">
-      <div className="header__left">
-        <Link to="/" className="header__title">
+    <header className="fixed top-0 left-0 w-full flex justify-between items-center px-8 py-4 bg-black z-50">
+      <div>
+        <Link to="/" className="text-white text-sm tracking-widest uppercase font-light">
           Martin Lièvre
         </Link>
       </div>
 
-      <div className="header__right">
-
-        {/* COMPOSITIONS */}
+      <div className="flex items-center gap-8">
         <DropDown titre="Compositions">
           {compCategories.map(cat => (
-            <Link key={cat.slug} to={`/compositions/${cat.slug}`}>
+            <Link key={cat.slug} to={`/compositions/${cat.slug}`} className="block text-white text-sm py-1 hover:text-gray-300">
               {cat.name}
             </Link>
           ))}
         </DropDown>
 
-        {/* ARRANGEMENTS */}
         <DropDown titre="Arrangements">
           {arrCategories.map(cat => (
-            <Link key={cat.slug} to={`/arrangements/${cat.slug}`}>
+            <Link key={cat.slug} to={`/arrangements/${cat.slug}`} className="block text-white text-sm py-1 hover:text-gray-300">
               {cat.name}
             </Link>
           ))}
         </DropDown>
 
-        <Link to="/contact" className="contact-btn">
+        <Link to="/contact" className="text-white text-sm tracking-widest uppercase hover:text-gray-300">
           Contact
         </Link>
       </div>
     </header>
-  );
+  )
 }
