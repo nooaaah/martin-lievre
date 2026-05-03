@@ -21,33 +21,33 @@ export default function ProjetDetail() {
     fetchData()
   }, [id])
 
-  if (loading) return <p className="text-white px-16 py-8">Chargement...</p>
-  if (!projet) return <p className="text-white px-16 py-8">Projet introuvable</p>
+  if (loading) return <p className="text-gray-600 px-12 py-8 text-xs tracking-[2px]">Chargement...</p>
+  if (!projet) return <p className="text-gray-600 px-12 py-8">Projet introuvable</p>
 
   return (
-    <div className="min-h-screen px-16 py-24">
-      <h1 className="text-4xl font-bold mb-12 uppercase tracking-widest">{projet.categorie}</h1>
-      <div className="flex justify-between gap-16">
-        <div className="max-w-xl">
-          <h2 className="text-2xl font-bold mb-6">{projet.titre}</h2>
-          <p className="text-gray-300 mb-6">{projet.description}</p>
-          {projet.difficulte && projet.annee && projet.duree && (
-            <p className="text-gray-400 italic mb-8">
-              {projet.difficulte} / {projet.annee} / {projet.duree}
+    <div className="min-h-screen px-12 py-24 pt-32">
+      <p className="text-gray-600 text-xs tracking-[3px] uppercase mb-16">{projet.categorie}</p>
+      <div className="flex justify-between gap-24">
+        <div style={{maxWidth: '600px'}}>
+          <h1 className="text-5xl font-light text-white mb-8">{projet.titre}</h1>
+          <p className="text-gray-400 leading-relaxed mb-8">{projet.description}</p>
+          {projet.difficulte && (
+            <p className="text-gray-600 text-sm italic mb-10">
+              {projet.difficulte}{projet.annee && ` / ${projet.annee}`}{projet.duree && ` / ${projet.duree}`}
             </p>
           )}
           {projet.audio && (
-            <audio controls className="w-full mb-8">
+            <audio controls className="w-full mb-10">
               <source src={projet.audio} />
             </audio>
           )}
-          <button className="border border-white text-white py-3 px-8 uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300">
+          <button className="text-white text-xs tracking-[3px] uppercase py-4 px-10 hover:bg-white hover:text-black transition-all duration-300" style={{border: '1px solid #333'}}>
             Acheter
           </button>
         </div>
-        <div className="w-96 h-96 flex-shrink-0">
+        <div className="flex-shrink-0" style={{width: '420px', height: '520px'}}>
           <img
-            src={projet.image || "https://picsum.photos/400/400"}
+            src={projet.image || "https://picsum.photos/400/500"}
             alt={projet.titre}
             className="w-full h-full object-cover"
           />

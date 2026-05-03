@@ -98,6 +98,24 @@ app.post("/admin/login", (req, res) => {
   res.json({ token })
 })
 
+app.put("/compositions/:id", verifierToken, async (req, res) => {
+  try {
+    const composition = await Composition.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    res.json(composition)
+  } catch (error) {
+    res.json({ message: "erreur" })
+  }
+})
+
+app.delete("/compositions/:id", verifierToken, async (req, res) => {
+  try {
+    await Composition.findByIdAndDelete(req.params.id)
+    res.json({ message: "composition supprimée" })
+  } catch (error) {
+    res.json({ message: "erreur" })
+  }
+})
+
 
 
 

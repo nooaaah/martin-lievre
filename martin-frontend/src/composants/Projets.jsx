@@ -21,24 +21,25 @@ export default function Projets() {
     fetchData()
   }, [category])
 
-  if (loading) return <p className="text-white px-16 py-8">Chargement...</p>
+  if (loading) return <p className="text-gray-600 px-12 py-8 text-xs tracking-[2px]">Chargement...</p>
 
   return (
-    <div className="px-16 py-24">
-      <h1 className="text-4xl font-bold mb-2 uppercase tracking-widest">{category}</h1>
-      <p className="text-gray-400 mb-12 capitalize">{type}</p>
-      <div className="grid grid-cols-3 gap-8">
+    <div className="px-12 py-24 pt-32">
+      <p className="text-gray-600 text-xs tracking-[3px] uppercase mb-4">{type}</p>
+      <h1 className="text-5xl font-light text-white mb-16">{category}</h1>
+      <div className="grid grid-cols-3 gap-12">
         {projets.map((p) => (
           <Link to={`/${type}/${category}/${p._id}`} key={p._id} className="group cursor-pointer">
-            <div className="w-full h-64 overflow-hidden mb-4">
+            <div className="w-full overflow-hidden mb-4" style={{height: '280px'}}>
               <img
                 src={p.image || "https://picsum.photos/400/300"}
                 alt={p.titre}
-                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
             </div>
-            <h3 className="text-white font-bold">{p.titre}</h3>
-            <p className="text-gray-400 text-sm mt-1">{p.description}</p>
+            <p className="text-gray-600 text-xs tracking-[2px] uppercase mb-2">{p.categorie}</p>
+            <h3 className="text-white font-light text-xl">{p.titre}</h3>
+            <p className="text-gray-500 text-sm mt-2 leading-relaxed">{p.description}</p>
           </Link>
         ))}
       </div>
