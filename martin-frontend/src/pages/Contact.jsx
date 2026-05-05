@@ -5,6 +5,7 @@ export default function Contact() {
   const [envoye, setEnvoye] = useState(false)
 
   async function handleSubmit() {
+    console.log("URL:", import.meta.env.VITE_API_URL)
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/contact`, {
         method: "POST",
