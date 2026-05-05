@@ -9,7 +9,11 @@ const cors = require("cors")
 const app = express()
 
 app.use(cors({
-  origin: "https://martin-lievre.vercel.app",
+  origin: [
+    "https://martin-lievre.vercel.app",
+    "https://martinlievre.ch",
+    "https://www.martinlievre.ch"
+  ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }))
@@ -90,24 +94,16 @@ app.post("/compositions", verifierToken, async (req, res) => {
 app.post("/contact", async (req, res) => {
   try {
     const { nom, email, message } = req.body
-    console.log("contact reçu:", nom, email)
-
     const message_db = new Message(req.body)
     await message_db.save()
-    console.log("sauvegardé en BDD")
-
     res.json({ message: "message envoyé" })
-
     transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_TO,
       subject: `Nouveau message de ${nom}`,
       text: `Nom: ${nom}\nEmail: ${email}\n\nMessage:\n${message}`
-    }).then(() => console.log("email envoyé"))
-      .catch(err => console.log("erreur email:", err))
-
+    }).catch(err => console.log("erreur email:", err))
   } catch (error) {
-    console.log("erreur:", error)
     res.json({ message: "erreur" })
   }
 })

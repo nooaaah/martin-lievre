@@ -5,7 +5,6 @@ export default function Contact() {
   const [envoye, setEnvoye] = useState(false)
 
   async function handleSubmit() {
-    console.log("URL:", import.meta.env.VITE_API_URL)
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/contact`, {
         method: "POST",
@@ -13,10 +12,9 @@ export default function Contact() {
         body: JSON.stringify(form)
       })
       const data = await response.json()
-      console.log("réponse:", data)
       if (data.message === "message envoyé") setEnvoye(true)
     } catch (error) {
-      console.log("erreur:", error)
+      console.log(error)
     }
   }
 
