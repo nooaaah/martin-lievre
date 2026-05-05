@@ -6,7 +6,6 @@ const compositionSchema = new mongoose.Schema({
   type: String,
   description: String,
   image: String,
-  prix: Number,
   audio: String,
   difficulte: String,
   annee: Number,
