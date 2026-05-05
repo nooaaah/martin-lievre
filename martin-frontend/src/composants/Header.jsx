@@ -23,43 +23,46 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 px-6 lg:px-12 py-6"
-      style={{background: '#0a0a0a', borderBottom: '1px solid #1a1a1a'}}>
+      style={{
+        background: 'linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%)',
+        borderBottom: '1px solid #1a1a1a'
+      }}>
       <div className="flex justify-between items-center">
-        <Link to="/" className="text-white text-xs tracking-[4px] uppercase font-light hover:text-gray-400 transition-colors">
+        <Link to="/" className="text-white text-xs tracking-[4px] uppercase font-light hover:text-gray-300 transition-colors">
           Martin Lièvre
         </Link>
 
-        
+
         <div className="hidden lg:flex items-center gap-10">
           <DropDown titre="Compositions">
             {compCategories.map(cat => (
-              <Link key={cat.slug} to={`/compositions/${cat.slug}`} className="block text-gray-500 text-xs py-1 tracking-[2px] uppercase hover:text-white transition-colors">
+              <Link key={cat.slug} to={`/compositions/${cat.slug}`} className="block text-gray-300 text-xs py-1 tracking-[2px] uppercase hover:text-white transition-colors">
                 {cat.name}
               </Link>
             ))}
           </DropDown>
           <DropDown titre="Arrangements">
             {arrCategories.map(cat => (
-              <Link key={cat.slug} to={`/arrangements/${cat.slug}`} className="block text-gray-500 text-xs py-1 tracking-[2px] uppercase hover:text-white transition-colors">
+              <Link key={cat.slug} to={`/arrangements/${cat.slug}`} className="block text-gray-300 text-xs py-1 tracking-[2px] uppercase hover:text-white transition-colors">
                 {cat.name}
               </Link>
             ))}
           </DropDown>
-          <Link to="/contact" className="text-gray-500 text-xs tracking-[2px] uppercase hover:text-white transition-colors">
+          <Link to="/contact" className="text-gray-300 text-xs tracking-[2px] uppercase hover:text-white transition-colors">
             Contact
           </Link>
         </div>
 
-        
-        <button className="lg:hidden text-white" onClick={() => setMenuOpen(!menuOpen)}>
+
+        <button className="lg:hidden text-white min-h-[44px] min-w-[44px] flex items-center justify-center" onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? "✕" : "☰"}
         </button>
       </div>
 
-      
+
       {menuOpen && (
         <div className="lg:hidden flex flex-col gap-6 pt-8 pb-4">
-          <p className="text-gray-600 text-xs tracking-[2px] uppercase">Compositions</p>
+          <p className="text-gray-400 text-xs tracking-[2px] uppercase">Compositions</p>
           {compCategories.map(cat => (
             <Link key={cat.slug} to={`/compositions/${cat.slug}`}
               className="text-white text-xs tracking-[2px] uppercase pl-4"
@@ -67,7 +70,7 @@ export default function Header() {
               {cat.name}
             </Link>
           ))}
-          <p className="text-gray-600 text-xs tracking-[2px] uppercase">Arrangements</p>
+          <p className="text-gray-400 text-xs tracking-[2px] uppercase">Arrangements</p>
           {arrCategories.map(cat => (
             <Link key={cat.slug} to={`/arrangements/${cat.slug}`}
               className="text-white text-xs tracking-[2px] uppercase pl-4"

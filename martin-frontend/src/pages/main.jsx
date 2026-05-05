@@ -6,6 +6,8 @@ import Home from '../composants/Home'
 import Contact from './Contact'
 import Erreur from './Erreur'
 import Admin from './Admin'
+import MentionsLegales from './MentionsLegales'
+import Confidentialite from './Confidentialite'
 import ProjetDetail from '../composants/ProjetDetail'
 import Projets from '../composants/Projets'
 import { BrowserRouter, Routes, Route } from "react-router"
@@ -18,6 +20,8 @@ createRoot(document.getElementById('root')).render(
         <Route path="contact" element={<Contact />} />
         <Route path="/:type/:category" element={<Projets />} />
         <Route path="/:type/:category/:id" element={<ProjetDetail />} />
+        <Route path="/mentions-legales" element={<MentionsLegales />} />
+        <Route path="/confidentialite" element={<Confidentialite />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="*" element={<Erreur />} />
       </Route>

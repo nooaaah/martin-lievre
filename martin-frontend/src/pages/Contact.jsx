@@ -30,7 +30,7 @@ export default function Contact() {
   return (
     <div className="min-h-screen flex items-center justify-center px-6 lg:px-12">
       <div className="w-full" style={{maxWidth: '500px'}}>
-        <p className="text-gray-600 text-xs tracking-[3px] uppercase mb-6">Contact</p>
+        <p className="text-gray-400 text-xs tracking-[3px] uppercase mb-6">Contact</p>
         <div style={{width: '30px', height: '1px', background: '#fff', marginBottom: '32px'}}></div>
         <h1 className="text-3xl lg:text-4xl font-light text-white mb-10 lg:mb-12">Prendre contact</h1>
         <div className="flex flex-col gap-8">

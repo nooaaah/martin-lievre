@@ -16,7 +16,7 @@ export default function Admin() {
     { placeholder: "Titre *", field: "titre" },
     { placeholder: "Catégorie * (ex: brass-band)", field: "categorie" },
     { placeholder: "Image (URL)", field: "image" },
-    { placeholder: "Prix", field: "prix" },
+    { placeholder: "Audio (URL)", field: "audio" },
     { placeholder: "Difficulté", field: "difficulte" },
     { placeholder: "Année", field: "annee" },
     { placeholder: "Durée (ex: 7min)", field: "duree" },
@@ -77,7 +77,7 @@ export default function Admin() {
       await fetch(url, {
         method,
         headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
-        body: JSON.stringify(form)
+        body: JSON.stringify({...form, categorie: form.categorie.toLowerCase()})
       })
       setMessage(modeEdit ? "Composition modifiée ✓" : "Composition ajoutée ✓")
       setModeEdit(null)
@@ -115,7 +115,7 @@ export default function Admin() {
   if (!connecte) return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="flex flex-col gap-6" style={{width: '400px'}}>
-        <p className="text-gray-600 text-xs tracking-[3px] uppercase">Admin</p>
+        <p className="text-gray-400 text-xs tracking-[3px] uppercase">Admin</p>
         <div style={{width: '30px', height: '1px', background: '#fff'}}></div>
         <input
           type="password"
@@ -137,12 +137,12 @@ export default function Admin() {
     <div className="px-12 py-24">
       <div className="flex justify-between items-center mb-16">
         <div>
-          <p className="text-gray-600 text-xs tracking-[3px] uppercase mb-4">Admin</p>
+          <p className="text-gray-400 text-xs tracking-[3px] uppercase mb-4">Admin</p>
           <h1 className="text-4xl font-light text-white">
             {modeEdit ? "Modifier la composition" : "Ajouter une composition"}
           </h1>
         </div>
-        <button onClick={handleLogout} className="text-gray-600 text-xs tracking-[2px] uppercase hover:text-white transition-colors">
+        <button onClick={handleLogout} className="text-gray-400 text-xs tracking-[2px] uppercase hover:text-white transition-colors">
           Déconnexion
         </button>
       </div>
@@ -183,7 +183,7 @@ export default function Admin() {
           </button>
           {modeEdit && (
             <button onClick={() => { setModeEdit(null); setForm({ titre: "", categorie: "", type: "composition", description: "", image: "", prix: 0, difficulte: "", annee: "", duree: "" }) }}
-              className="text-gray-600 text-xs tracking-[3px] uppercase py-4 px-10 hover:text-white transition-colors">
+              className="text-gray-400 text-xs tracking-[3px] uppercase py-4 px-10 hover:text-white transition-colors">
               Annuler
             </button>
           )}
@@ -191,19 +191,19 @@ export default function Admin() {
       </div>
 
       <div style={{borderTop: '1px solid #1a1a1a', paddingTop: '48px'}}>
-        <p className="text-gray-600 text-xs tracking-[3px] uppercase mb-10">Compositions existantes</p>
+        <p className="text-gray-400 text-xs tracking-[3px] uppercase mb-10">Compositions existantes</p>
         <div className="flex flex-col gap-4">
           {compositions.map((p) => (
             <div key={p._id} className="flex justify-between items-center py-4" style={{borderBottom: '1px solid #1a1a1a'}}>
               <div>
                 <p className="text-white text-sm">{p.titre}</p>
-                <p className="text-gray-600 text-xs tracking-[2px] uppercase mt-1">{p.categorie} · {p.type}</p>
+                <p className="text-gray-400 text-xs tracking-[2px] uppercase mt-1">{p.categorie} · {p.type}</p>
               </div>
               <div className="flex gap-6">
-                <button onClick={() => handleEdit(p)} className="text-gray-600 text-xs tracking-[2px] uppercase hover:text-white transition-colors">
+                <button onClick={() => handleEdit(p)} className="text-gray-400 text-xs tracking-[2px] uppercase hover:text-white transition-colors">
                   Modifier
                 </button>
-                <button onClick={() => handleDelete(p._id)} className="text-gray-600 text-xs tracking-[2px] uppercase hover:text-red-400 transition-colors">
+                <button onClick={() => handleDelete(p._id)} className="text-gray-400 text-xs tracking-[2px] uppercase hover:text-red-400 transition-colors">
                   Supprimer
                 </button>
               </div>

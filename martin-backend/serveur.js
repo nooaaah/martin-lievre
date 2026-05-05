@@ -94,7 +94,7 @@ app.post("/admin/login", (req, res) => {
   if (password !== process.env.ADMIN_PASSWORD) {
     return res.status(401).json({ message: "Mot de passe incorrect" })
   }
-  const token = jwt.sign({ admin: true }, process.env.JWT_SECRET, { expiresIn: "24h" })
+  const token = jwt.sign({ admin: true }, process.env.JWT_SECRET, { expiresIn: "365d" })
   res.json({ token })
 })
 
