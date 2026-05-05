@@ -28,7 +28,7 @@ export default function Admin() {
 
   async function fetchCompositions() {
     try {
-      const response = await fetch("http://localhost:5000/compositions")
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/compositions`)
       const data = await response.json()
       setCompositions(data)
     } catch (error) {
@@ -38,7 +38,7 @@ export default function Admin() {
 
   async function handleLogin() {
     try {
-      const response = await fetch("http://localhost:5000/admin/login", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ password: mdp })
@@ -71,8 +71,8 @@ export default function Admin() {
     try {
       const token = localStorage.getItem("token")
       const url = modeEdit
-        ? `http://localhost:5000/compositions/${modeEdit}`
-        : "http://localhost:5000/compositions"
+        ? `${import.meta.env.VITE_API_URL}/compositions/${modeEdit}`
+        : `${import.meta.env.VITE_API_URL}/compositions`
       const method = modeEdit ? "PUT" : "POST"
       await fetch(url, {
         method,
@@ -92,7 +92,7 @@ export default function Admin() {
     if (!confirm("Supprimer cette composition ?")) return
     try {
       const token = localStorage.getItem("token")
-      await fetch(`http://localhost:5000/compositions/${id}`, {
+      await fetch(`${import.meta.env.VITE_API_URL}/compositions/${id}`, {
         method: "DELETE",
         headers: { "Authorization": `Bearer ${token}` }
       })

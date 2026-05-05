@@ -9,7 +9,7 @@ export default function Projets() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(`http://localhost:5000/compositions/${category}`)
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/compositions/${category}`)
         const result = await response.json()
         setProjets(result)
       } catch (error) {

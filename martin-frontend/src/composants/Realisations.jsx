@@ -4,11 +4,12 @@ import { Link } from "react-router"
 export default function Realisations() {
   const [projets, setProjets] = useState([])
   const [loading, setLoading] = useState(true)
+  
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch("http://localhost:5000/compositions")
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/compositions`)
         const result = await response.json()
         setProjets(result)
       } catch(error) {

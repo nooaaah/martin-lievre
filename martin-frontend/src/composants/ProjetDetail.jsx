@@ -10,7 +10,7 @@ export default function ProjetDetail() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(`http://localhost:5000/compositions/detail/${id}`)
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/compositions/detail/${id}`)
         const result = await response.json()
         setProjet(result)
       } catch (error) {

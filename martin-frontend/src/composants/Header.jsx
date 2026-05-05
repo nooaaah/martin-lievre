@@ -10,7 +10,7 @@ export default function Header() {
   useEffect(() => {
     async function fetchCategories() {
       try {
-        const response = await fetch("http://localhost:5000/categories")
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/categories`)
         const data = await response.json()
         setCompCategories(data.compositions.map(cat => ({ slug: cat, name: cat })))
         setArrCategories(data.arrangements.map(cat => ({ slug: cat, name: cat })))
