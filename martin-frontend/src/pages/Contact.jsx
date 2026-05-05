@@ -13,9 +13,10 @@ export default function Contact() {
         body: JSON.stringify(form)
       })
       const data = await response.json()
+      console.log("réponse:", data)
       if (data.message === "message envoyé") setEnvoye(true)
     } catch (error) {
-      console.log(error)
+      console.log("erreur:", error)
     }
   }
 
