@@ -96,15 +96,16 @@ app.post("/contact", async (req, res) => {
     await message_db.save()
     console.log("sauvegardé en BDD")
 
-    await transporter.sendMail({
+    res.json({ message: "message envoyé" })
+
+    transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_TO,
       subject: `Nouveau message de ${nom}`,
       text: `Nom: ${nom}\nEmail: ${email}\n\nMessage:\n${message}`
-    })
-    console.log("email envoyé")
+    }).then(() => console.log("email envoyé"))
+      .catch(err => console.log("erreur email:", err))
 
-    res.json({ message: "message envoyé" })
   } catch (error) {
     console.log("erreur:", error)
     res.json({ message: "erreur" })
