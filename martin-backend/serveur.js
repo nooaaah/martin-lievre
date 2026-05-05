@@ -1,5 +1,6 @@
 require("dotenv").config()
 const jwt = require("jsonwebtoken")
+const nodemailer = require("nodemailer")
 const Composition = require("./models/Composition")
 const Message = require("./models/Message")
 const express = require("express")
@@ -7,16 +8,20 @@ const mongoose = require("mongoose")
 const cors = require("cors")
 const app = express()
 
-
 app.use(cors())
 app.use(express.json())
-
-
 
 mongoose.connect(process.env.MONGO_URL)
 .then(()=>console.log("MongoDB connecté"))
 .catch((err)=>console.log(err))
 
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  }
+})
 
 function verifierToken(req, res, next) {
   const token = req.headers.authorization?.split(" ")[1]
@@ -28,7 +33,6 @@ function verifierToken(req, res, next) {
     res.status(401).json({ message: "Token invalide" })
   }
 }
-
 
 app.get("/compositions", async(req,res)=>{
   try{
@@ -67,7 +71,6 @@ app.get("/categories", async (req, res) => {
   }
 })
 
-
 app.post("/compositions", verifierToken, async (req, res) => {
   try{
     const composition = new Composition(req.body)
@@ -80,14 +83,27 @@ app.post("/compositions", verifierToken, async (req, res) => {
 
 app.post("/contact", async (req, res) => {
   try {
-    const message = new Message(req.body)
-    await message.save()
+    const { nom, email, message } = req.body
+    console.log("contact reçu:", nom, email)
+
+    const message_db = new Message(req.body)
+    await message_db.save()
+    console.log("sauvegardé en BDD")
+
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: process.env.EMAIL_TO,
+      subject: `Nouveau message de ${nom}`,
+      text: `Nom: ${nom}\nEmail: ${email}\n\nMessage:\n${message}`
+    })
+    console.log("email envoyé")
+
     res.json({ message: "message envoyé" })
   } catch (error) {
+    console.log("erreur:", error)
     res.json({ message: "erreur" })
   }
 })
-
 
 app.post("/admin/login", (req, res) => {
   const { password } = req.body
@@ -115,9 +131,5 @@ app.delete("/compositions/:id", verifierToken, async (req, res) => {
     res.json({ message: "erreur" })
   }
 })
-
-
-
-
 
 app.listen(process.env.PORT, ()=>console.log("serveur connecté sur le port "))
