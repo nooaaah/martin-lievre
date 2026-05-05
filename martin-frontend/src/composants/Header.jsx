@@ -22,8 +22,10 @@ export default function Header() {
   }, [])
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 px-6 lg:px-12 py-6"
-      style={{ background: '#0a0a0a', borderBottom: '1px solid #1a1a1a' }}>
+    <header
+      className="fixed top-0 left-0 w-full z-50 px-6 lg:px-12 py-6 bg-[#0a0a0a] lg:bg-transparent"
+      style={{ borderBottom: '1px solid #1a1a1a' }}
+    >
       <div className="flex justify-between items-center">
         <Link to="/" className="text-white text-xs tracking-[4px] uppercase font-light hover:text-gray-300 transition-colors">
           Martin Lièvre
