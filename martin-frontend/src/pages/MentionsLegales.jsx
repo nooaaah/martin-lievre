@@ -12,7 +12,7 @@ export default function MentionsLegales() {
 
         <div>
           <h2 className="text-white font-light text-xl mb-4">2. Hébergeur du site</h2>
-          <p className="text-gray-400 leading-relaxed">Nom de l'hébergeur : …</p>
+          <p className="text-gray-400 leading-relaxed">Nom de l'hébergeur : Vercel</p>
         </div>
 
         <div>

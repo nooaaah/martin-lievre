@@ -23,10 +23,7 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 px-6 lg:px-12 py-6"
-      style={{
-        background: 'linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%)',
-        borderBottom: '1px solid #1a1a1a'
-      }}>
+      style={{ background: '#0a0a0a', borderBottom: '1px solid #1a1a1a' }}>
       <div className="flex justify-between items-center">
         <Link to="/" className="text-white text-xs tracking-[4px] uppercase font-light hover:text-gray-300 transition-colors">
           Martin Lièvre
