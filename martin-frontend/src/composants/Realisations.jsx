@@ -30,7 +30,7 @@ export default function Realisations() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
         {projets.map((p) => (
           <div key={p._id}>
-            <Link to={`/${type}/${category}/${p._id}`} className="cursor-pointer group inline-block">
+            <Link to={`/${p.type}/${p.categorie}/${p._id}`} className="cursor-pointer group inline-block">
               <img
                 loading="lazy"
                 src={p.image}
