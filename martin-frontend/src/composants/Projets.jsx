@@ -30,12 +30,12 @@ export default function Projets() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
         {projets.map((p) => (
           <Link to={`/${type}/${category}/${p._id}`} key={p._id} className="group cursor-pointer">
-            <div className="w-full overflow-hidden mb-4 flex items-center justify-center bg-black" style={{ height: '280px' }}>
+            <div className="w-full overflow-hidden mb-4" style={{ height: '280px' }}>
               <img
                 loading="lazy"
                 src={p.image}
                 alt={p.titre}
-                className="h-full w-auto object-contain transition-transform duration-500 group-hover:scale-105"
+                className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
               />
             </div>
             <p className="text-gray-400 text-xs tracking-[2px] uppercase mb-2">{p.categorie}</p>
