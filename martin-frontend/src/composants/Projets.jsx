@@ -29,18 +29,20 @@ export default function Projets() {
       <h1 className="text-3xl lg:text-5xl font-light text-white mb-12 lg:mb-16">{category}</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
         {projets.map((p) => (
-          <Link to={`/${type}/${category}/${p._id}`} key={p._id} className="cursor-pointer inline-block group">
-            <img
-              loading="lazy"
-              src={p.image}
-              alt={p.titre}
-              className="w-auto mb-4 transition-transform duration-500 group-hover:scale-105"
-              style={{ maxHeight: '300px', maxWidth: '100%', display: 'block' }}
-            />
+          <div key={p._id}>
+            <Link to={`/${type}/${category}/${p._id}`} className="cursor-pointer group inline-block">
+              <img
+                loading="lazy"
+                src={p.image}
+                alt={p.titre}
+                className="w-auto mb-4 transition-transform duration-500 group-hover:scale-105"
+                style={{ maxHeight: '300px', maxWidth: '100%', display: 'block' }}
+              />
+            </Link>
             <p className="text-gray-400 text-xs tracking-[2px] uppercase mb-2">{p.categorie}</p>
             <h3 className="text-white font-light text-xl">{p.titre}</h3>
             <p className="text-gray-300 text-sm mt-2 leading-relaxed">{p.description}</p>
-          </Link>
+          </div>
         ))}
       </div>
     </div>
