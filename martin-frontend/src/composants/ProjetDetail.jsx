@@ -50,7 +50,7 @@ export default function ProjetDetail() {
             Acheter
           </Link>
         </div>
-        <div className="flex-shrink-0 flex items-center justify-center mt-10 lg:mt-0" style={{ width: '100%', maxWidth: '420px', height: '400px' }}>
+        <div className="flex-shrink-0 flex items-center justify-center mt-10 lg:mt-0" style={{ width: '100%', maxWidth: '550px', height: '600px' }}>
           <img
             src={projet.image}
             alt={projet.titre}
