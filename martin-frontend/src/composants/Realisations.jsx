@@ -29,7 +29,7 @@ export default function Realisations() {
       <p className="text-gray-400 text-sm mb-12 lg:mb-16">Si l'une de mes pièces vous intéresse, vous pouvez me la commander via mon formulaire de contact.</p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
         {projets.map((p) => (
-          <Link to={`/${p.type}/${p.categorie}/${p._id}`} key={p._id} className="cursor-pointer block group">
+          <Link to={`/${p.type}/${p.categorie}/${p._id}`} key={p._id} className="cursor-pointer inline-block group">
             <img
               loading="lazy"
               src={p.image}
