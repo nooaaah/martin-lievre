@@ -5,7 +5,6 @@ export default function Realisations() {
   const [projets, setProjets] = useState([])
   const [loading, setLoading] = useState(true)
 
-
   useEffect(() => {
     async function fetchData() {
       try {
@@ -30,15 +29,13 @@ export default function Realisations() {
       <p className="text-gray-400 text-sm mb-12 lg:mb-16">Si l'une de mes pièces vous intéresse, vous pouvez me la commander via mon formulaire de contact.</p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
         {projets.map((p) => (
-        <Link to={`/${p.type}/${p.categorie}/${p._id}`} key={p._id} className="group cursor-pointer block">
-            <div className="w-full overflow-hidden mb-4 flex items-center justify-center bg-black" style={{ height: '280px' }}>
-              <img
-                loading="lazy"
-                src={p.image}
-                alt={p.titre}
-                className="h-full w-auto object-contain transition-transform duration-500 group-hover:scale-105"
-              />
-            </div>
+          <Link to={`/${p.type}/${p.categorie}/${p._id}`} key={p._id} className="group cursor-pointer block">
+            <img
+              loading="lazy"
+              src={p.image}
+              alt={p.titre}
+              className="w-full h-auto mb-4 transition-transform duration-500 group-hover:scale-105"
+            />
             <p className="text-gray-400 text-xs tracking-[2px] uppercase mb-2">{p.categorie}</p>
             <h3 className="text-white font-light text-xl">{p.titre}</h3>
             <p className="text-gray-300 text-sm mt-1 leading-relaxed">{p.description}</p>
