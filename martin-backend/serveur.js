@@ -73,7 +73,7 @@ app.get("/compositions/:categorie", async (req, res) => {
 
 app.get("/categories", async (req, res) => {
   try {
-    const compositions = await Composition.distinct("categorie")
+    const compositions = await Composition.distinct("categorie", { type: "composition" })
     const arrangements = await Composition.distinct("categorie", { type: "arrangement" })
     res.json({ compositions, arrangements })
   } catch (error) {
