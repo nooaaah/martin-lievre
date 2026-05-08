@@ -34,8 +34,8 @@ export default function Realisations() {
               loading="lazy"
               src={p.image}
               alt={p.titre}
-              className="w-full mb-4"
-              style={{ maxHeight: '300px', objectFit: 'contain' }}
+              className="w-auto mb-4"
+              style={{ maxHeight: '300px', maxWidth: '100%', display: 'block' }}
             />
             <p className="text-gray-400 text-xs tracking-[2px] uppercase mb-2">{p.categorie}</p>
             <h3 className="text-white font-light text-xl">{p.titre}</h3>
