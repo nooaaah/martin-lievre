@@ -29,12 +29,12 @@ export default function Realisations() {
       <p className="text-gray-400 text-sm mb-12 lg:mb-16">Si l'une de mes pièces vous intéresse, vous pouvez me la commander via mon formulaire de contact.</p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
         {projets.map((p) => (
-          <Link to={`/${p.type}/${p.categorie}/${p._id}`} key={p._id} className="group cursor-pointer block">
+          <Link to={`/${p.type}/${p.categorie}/${p._id}`} key={p._id} className="cursor-pointer block">
             <img
               loading="lazy"
               src={p.image}
               alt={p.titre}
-              className="w-full h-auto mb-4 transition-transform duration-500 group-hover:scale-105"
+              className="w-full h-auto mb-4"
             />
             <p className="text-gray-400 text-xs tracking-[2px] uppercase mb-2">{p.categorie}</p>
             <h3 className="text-white font-light text-xl">{p.titre}</h3>
