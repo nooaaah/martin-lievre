@@ -197,7 +197,7 @@ export default function Admin() {
             <div key={p._id} className="flex justify-between items-center py-4" style={{borderBottom: '1px solid #1a1a1a'}}>
               <div>
                 <p className="text-white text-sm">{p.titre}</p>
-                <p className="text-gray-400 text-xs tracking-[2px] uppercase mt-1">{p.categorie} · {p.type}</p>
+                <p className="text-gray-400 text-xs tracking-[2px] uppercase mt-1">{p.categorie.charAt(0).toUpperCase() + p.categorie.slice(1)} · {p.type}</p>
               </div>
               <div className="flex gap-6">
                 <button onClick={() => handleEdit(p)} className="text-gray-400 text-xs tracking-[2px] uppercase hover:text-white transition-colors">

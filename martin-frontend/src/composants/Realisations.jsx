@@ -30,7 +30,7 @@ export default function Realisations() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
         {projets.map((p) => (
           <div key={p._id}>
-            <Link to={`/${p.type}/${p.categorie}/${p._id}`} className="cursor-pointer group inline-block">
+            <Link to={`/${p.type}/${p.categorie.charAt(0).toUpperCase() + p.categorie.slice(1)}/${p._id}`} className="cursor-pointer group inline-block">
               <img
                 loading="lazy"
                 src={p.image}
@@ -39,7 +39,7 @@ export default function Realisations() {
                 style={{ maxHeight: '300px', maxWidth: '100%', display: 'block' }}
               />
             </Link>
-            <p className="text-gray-400 text-xs tracking-[2px] uppercase mb-2">{p.categorie}</p>
+            <p className="text-gray-400 text-xs tracking-[2px] uppercase mb-2">{p.categorie.charAt(0).toUpperCase() + p.categorie.slice(1)}</p>
             <h3 className="text-white font-light text-xl">{p.titre}</h3>
             <p className="text-gray-300 text-sm mt-2 leading-relaxed">{p.description}</p>
           </div>
