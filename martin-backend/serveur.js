@@ -1,6 +1,7 @@
 require("dotenv").config()
 const jwt = require("jsonwebtoken")
-const nodemailer = require("nodemailer")
+const { Resend } = require("resend")
+const resend = new Resend(process.env.RESEND_API_KEY)
 const Composition = require("./models/Composition")
 const Message = require("./models/Message")
 const express = require("express")
@@ -23,15 +24,7 @@ mongoose.connect(process.env.MONGO_URL)
 .then(()=>console.log("MongoDB connecté"))
 .catch((err)=>console.log(err))
 
-const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 587,
-  secure: false,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  }
-})
+
 
 function verifierToken(req, res, next) {
   const token = req.headers.authorization?.split(" ")[1]
@@ -97,12 +90,14 @@ app.post("/contact", async (req, res) => {
     const message_db = new Message(req.body)
     await message_db.save()
     res.json({ message: "message envoyé" })
-    transporter.sendMail({
-      from: process.env.EMAIL_USER,
+
+    resend.emails.send({
+      from: "onboarding@resend.dev",
       to: process.env.EMAIL_TO,
       subject: `Nouveau message de ${nom}`,
       text: `Nom: ${nom}\nEmail: ${email}\n\nMessage:\n${message}`
     }).catch(err => console.log("erreur email:", err))
+
   } catch (error) {
     res.json({ message: "erreur" })
   }
