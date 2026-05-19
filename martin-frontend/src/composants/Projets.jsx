@@ -5,11 +5,13 @@ export default function Projets() {
   const { type, category } = useParams()
   const [projets, setProjets] = useState([])
   const [loading, setLoading] = useState(true)
+  
+  const categoryDisplay = category.charAt(0).toUpperCase() + category.slice(1)
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/compositions/${category.charAt(0).toUpperCase() + category.slice(1)}`)
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/compositions/${category}`)
         const result = await response.json()
         setProjets(result)
       } catch (error) {
@@ -26,11 +28,11 @@ export default function Projets() {
   return (
     <div className="px-6 lg:px-12 py-16 lg:py-24 pt-32">
       <p className="text-gray-400 text-xs tracking-[3px] uppercase mb-4">{type}</p>
-      <h1 className="text-3xl lg:text-5xl font-light text-white mb-12 lg:mb-16">{category.charAt(0).toUpperCase() + category.slice(1)}</h1>
+      <h1 className="text-3xl lg:text-5xl font-light text-white mb-12 lg:mb-16">{categoryDisplay}</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
         {projets.map((p) => (
           <div key={p._id}>
-            <Link to={`/${type}/${category.charAt(0).toUpperCase() + category.slice(1)}/${p._id}`} className="cursor-pointer group inline-block">
+            <Link to={`/${type}/${category}/${p._id}`} className="cursor-pointer group inline-block">
               <img
                 loading="lazy"
                 src={p.image}
