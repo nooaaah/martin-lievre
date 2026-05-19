@@ -134,5 +134,5 @@ app.delete("/compositions/:id", verifierToken, async (req, res) => {
     res.json({ message: "erreur" })
   }
 })
-
+const PORT = process.env.PORT || 3000
 app.listen(process.env.PORT, ()=>console.log("serveur connecté sur le port "))
