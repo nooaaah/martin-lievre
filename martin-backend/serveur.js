@@ -91,12 +91,14 @@ app.post("/contact", async (req, res) => {
     await message_db.save()
     res.json({ message: "message envoyé" })
 
+    const resend = new Resend(process.env.RESEND_API_KEY)
     resend.emails.send({
       from: "onboarding@resend.dev",
-      to: process.env.EMAIL_TO,
+      to: "delivered@resend.dev",
       subject: `Nouveau message de ${nom}`,
       text: `Nom: ${nom}\nEmail: ${email}\n\nMessage:\n${message}`
-    }).catch(err => console.log("erreur email:", err))
+    }).then(data => console.log("email envoyé:", data))
+      .catch(err => console.log("erreur email:", err))
 
   } catch (error) {
     res.json({ message: "erreur" })
