@@ -97,7 +97,7 @@ app.post("/contact", async (req, res) => {
 
     const resend = new Resend(process.env.RESEND_API_KEY)
     resend.emails.send({
-      from: "onboarding@resend.dev",
+      from: "contact@martinlievre.ch",
       to: process.env.EMAIL_TO,
       subject: `Nouveau message de ${nom}`,
       text: `Nom: ${nom}\nEmail: ${email}\n\nMessage:\n${message}`
