@@ -1,4 +1,3 @@
-require("dotenv").config()
 const jwt = require("jsonwebtoken")
 const { Resend } = require("resend")
 const resend = new Resend(process.env.RESEND_API_KEY)
@@ -8,6 +7,11 @@ const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors")
 const app = express()
+
+
+if (process.env.NODE_ENV !== 'production') {
+  require("dotenv").config()
+}
 
 app.use(cors({
   origin: [
