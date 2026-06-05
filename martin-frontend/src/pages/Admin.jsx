@@ -8,7 +8,7 @@ export default function Admin() {
   const [modeEdit, setModeEdit] = useState(null)
   const [form, setForm] = useState({
     titre: "", categorie: "", type: "composition",
-    description: "", image: "", prix: 0,
+    description: "", image: "", audio: "",
     difficulte: "", annee: "", duree: ""
   })
 
@@ -81,7 +81,7 @@ export default function Admin() {
       })
       setMessage(modeEdit ? "Composition modifiée ✓" : "Composition ajoutée ✓")
       setModeEdit(null)
-      setForm({ titre: "", categorie: "", type: "composition", description: "", image: "", prix: 0, difficulte: "", annee: "", duree: "" })
+      setForm({ titre: "", categorie: "", type: "composition", description: "", image: "", audio: "", difficulte: "", annee: "", duree: "" })
       fetchCompositions()
     } catch (error) {
       setMessage("Erreur")
@@ -106,7 +106,7 @@ export default function Admin() {
     setModeEdit(p._id)
     setForm({
       titre: p.titre, categorie: p.categorie, type: p.type,
-      description: p.description, image: p.image, prix: p.prix,
+      description: p.description, image: p.image, audio: p.audio || "",
       difficulte: p.difficulte || "", annee: p.annee || "", duree: p.duree || ""
     })
     window.scrollTo(0, 0)
@@ -182,7 +182,7 @@ export default function Admin() {
             {modeEdit ? "Modifier" : "Ajouter"}
           </button>
           {modeEdit && (
-            <button onClick={() => { setModeEdit(null); setForm({ titre: "", categorie: "", type: "composition", description: "", image: "", prix: 0, difficulte: "", annee: "", duree: "" }) }}
+            <button onClick={() => { setModeEdit(null); setForm({ titre: "", categorie: "", type: "composition", description: "", image: "", audio: "", difficulte: "", annee: "", duree: "" }) }}
               className="text-gray-400 text-xs tracking-[3px] uppercase py-4 px-10 hover:text-white transition-colors">
               Annuler
             </button>

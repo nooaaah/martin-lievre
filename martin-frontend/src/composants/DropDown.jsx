@@ -10,7 +10,7 @@ const DropDown = ({ titre, children }) => {
       </p>
       {isOpen && (
         <div className="absolute top-full left-0 pt-4 min-w-48 z-50">
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 bg-[#0a0a0a] p-4">
             {children}
           </div>
         </div>
